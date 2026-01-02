@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Exit Ticket — Module 4 Lesson 11</title>
+<style>
+  :root{
+    --bg:#f3f4f6; --card:#ffffff; --ink:#0f172a; --muted:#475569;
+    --line:rgba(2,6,23,.12);
+    --good-bg:#dcfce7; --good-br:#22c55e;
+    --warn-bg:#fef9c3; --warn-br:#f59e0b;
+    --btn:#111827; --btn2:#4b5563; --btnText:#ffffff; --pill:#e5e7eb;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);padding:24px}
+  .card{max-width:980px;margin:auto;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 18px 50px rgba(2,6,23,.10)}
+  h1{margin:0 0 6px;font-size:30px;letter-spacing:.2px}
+  .note{font-size:14px;color:var(--muted);margin:0 0 14px}
+  .tag{display:inline-block;padding:6px 10px;border-radius:999px;background:var(--pill);font-size:13px;font-weight:800}
+  .toprow{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:flex-start;margin-bottom:10px}
+  label{font-weight:900}
+  input,textarea,select,button{font-size:16px;padding:10px;border-radius:10px;border:1px solid var(--line);outline:none}
+  input,textarea,select{background:#fff;color:var(--ink)}
+  input:focus, textarea:focus, select:focus{border-color:#111827 !important;box-shadow:none !important}
+  textarea{width:100%;min-height:72px;resize:vertical}
+  .fieldrow{display:grid;grid-template-columns:1fr;gap:10px;margin:14px 0}
+  @media (min-width:720px){.fieldrow{grid-template-columns:1.2fr .8fr .6fr}}
+  .problem{margin:16px 0;padding:16px;border:1px solid var(--line);border-radius:16px;background:#fafafa}
+  .problem strong{display:inline-block;margin-bottom:6px}
+  .rowflex{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  button{cursor:pointer;border:none;background:var(--btn);color:var(--btnText);font-weight:900}
+  button.secondary{background:var(--btn2)}
+  button.smallbtn{padding:8px 10px;border-radius:10px;background:#e5e7eb;color:#111827;border:1px solid var(--line);font-weight:900}
+  button:hover{filter:brightness(.98)}
+  .feedback{margin-top:10px;padding:10px 12px;border-radius:12px;border:1px solid var(--line);color:var(--muted);background:#fff}
+  .feedback.good{background:var(--good-bg);border-color:var(--good-br);color:#065f46;font-weight:800}
+  .feedback.bad{background:var(--warn-bg);border-color:var(--warn-br);color:#92400e;font-weight:800}
+  .rewrite{margin-top:10px;padding:12px;border:1px dashed rgba(2,6,23,.25);border-radius:14px;background:#fff;display:none}
+  .rewrite input{width:100%}
+  /* Fraction builder modal */
+  .builder-backdrop{position:fixed; inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;padding:16px;z-index:9999}
+  .builder{width:min(520px, 96vw);background:#fff;color:#111;border-radius:14px;box-shadow:0 18px 50px rgba(0,0,0,.25);border:1px solid #e5e7eb;padding:16px}
+  .builder h2{margin:0 0 10px;font-size:18px}
+  .builder .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+  .builder .hint{font-size:13px;color:#6b7280;margin-top:8px}
+  .builder .actions{display:flex;gap:10px;justify-content:flex-end;margin-top:12px}
+  /* Reward reveal (Minecraft theme) */
+  .reward{margin:14px 0 18px;padding:16px;border:1px solid var(--line);border-radius:18px;background:#fff}
+  .reward-title{font-weight:1000;font-size:18px;margin:0 0 2px}
+  .reward-sub{font-size:14px;color:var(--muted)}
+  .reward-status{font-size:13px;font-weight:900;background:#f1f5f9;border:1px solid var(--line);padding:6px 10px;border-radius:999px}
+  .reward-frame{position:relative;margin-top:12px;border-radius:16px;overflow:hidden;border:1px solid var(--line);aspect-ratio:420/220;min-height:220px}
+  .reward-done{position:absolute;inset:auto 12px 12px 12px;background:rgba(34,197,94,.16);border:1px solid rgba(34,197,94,.55);border-radius:14px;padding:10px 12px;font-weight:1000;display:none}
+  .piece-label{font-size:12px;fill:#0f172a;opacity:.5;font-weight:800}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="toprow">
+    <div>
+      <h1>Exit Ticket — Module 4 Lesson 11</h1>
+      <div class="tag">Self-check • Submit downloads proof • Minecraft • v2 (no answers in examples)</div>
+    </div>
+  </div>
+  <p class="note">Open in <strong>Chrome</strong> (not Drive preview). Green = correct. Yellow = try again. You can submit even if you missed one.</p>
+
+  <div class="reward" aria-label="Reward image reveal">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+      <div>
+        <div class="reward-title">⛏️ Build the Creeper!</div>
+        <div class="reward-sub">Each correct answer reveals part of the picture. Get all 4 correct to complete it.</div>
+      </div>
+      <div class="reward-status" id="rewardStatus">Pieces unlocked: 0/4</div>
+    </div>
+
+    <div class="reward-frame" role="img" aria-label="Minecraft-style creeper face appears in four pieces">
+      <svg viewBox="0 0 420 220" width="100%" height="100%" aria-hidden="true">
+        <rect x="0" y="0" width="420" height="220" rx="16" ry="16" fill="#f8fafc"/>
+        <g opacity="0.14" fill="#0f172a"><circle cx="30" cy="30" r="2"/><circle cx="60" cy="30" r="2"/><circle cx="90" cy="30" r="2"/><circle cx="120" cy="30" r="2"/><circle cx="150" cy="30" r="2"/><circle cx="180" cy="30" r="2"/><circle cx="210" cy="30" r="2"/><circle cx="240" cy="30" r="2"/><circle cx="270" cy="30" r="2"/><circle cx="300" cy="30" r="2"/><circle cx="330" cy="30" r="2"/><circle cx="360" cy="30" r="2"/><circle cx="390" cy="30" r="2"/><circle cx="30" cy="60" r="2"/><circle cx="60" cy="60" r="2"/><circle cx="90" cy="60" r="2"/><circle cx="120" cy="60" r="2"/><circle cx="150" cy="60" r="2"/><circle cx="180" cy="60" r="2"/><circle cx="210" cy="60" r="2"/><circle cx="240" cy="60" r="2"/><circle cx="270" cy="60" r="2"/><circle cx="300" cy="60" r="2"/><circle cx="330" cy="60" r="2"/><circle cx="360" cy="60" r="2"/><circle cx="390" cy="60" r="2"/><circle cx="30" cy="90" r="2"/><circle cx="60" cy="90" r="2"/><circle cx="90" cy="90" r="2"/><circle cx="120" cy="90" r="2"/><circle cx="150" cy="90" r="2"/><circle cx="180" cy="90" r="2"/><circle cx="210" cy="90" r="2"/><circle cx="240" cy="90" r="2"/><circle cx="270" cy="90" r="2"/><circle cx="300" cy="90" r="2"/><circle cx="330" cy="90" r="2"/><circle cx="360" cy="90" r="2"/><circle cx="390" cy="90" r="2"/><circle cx="30" cy="120" r="2"/><circle cx="60" cy="120" r="2"/><circle cx="90" cy="120" r="2"/><circle cx="120" cy="120" r="2"/><circle cx="150" cy="120" r="2"/><circle cx="180" cy="120" r="2"/><circle cx="210" cy="120" r="2"/><circle cx="240" cy="120" r="2"/><circle cx="270" cy="120" r="2"/><circle cx="300" cy="120" r="2"/><circle cx="330" cy="120" r="2"/><circle cx="360" cy="120" r="2"/><circle cx="390" cy="120" r="2"/><circle cx="30" cy="150" r="2"/><circle cx="60" cy="150" r="2"/><circle cx="90" cy="150" r="2"/><circle cx="120" cy="150" r="2"/><circle cx="150" cy="150" r="2"/><circle cx="180" cy="150" r="2"/><circle cx="210" cy="150" r="2"/><circle cx="240" cy="150" r="2"/><circle cx="270" cy="150" r="2"/><circle cx="300" cy="150" r="2"/><circle cx="330" cy="150" r="2"/><circle cx="360" cy="150" r="2"/><circle cx="390" cy="150" r="2"/><circle cx="30" cy="180" r="2"/><circle cx="60" cy="180" r="2"/><circle cx="90" cy="180" r="2"/><circle cx="120" cy="180" r="2"/><circle cx="150" cy="180" r="2"/><circle cx="180" cy="180" r="2"/><circle cx="210" cy="180" r="2"/><circle cx="240" cy="180" r="2"/><circle cx="270" cy="180" r="2"/><circle cx="300" cy="180" r="2"/><circle cx="330" cy="180" r="2"/><circle cx="360" cy="180" r="2"/><circle cx="390" cy="180" r="2"/></g>
+
+        <g id="p1" opacity="0">
+          <rect x="110" y="25" width="100" height="80" rx="10" fill="#22c55e" stroke="#0f172a" stroke-width="3"/>
+          <rect x="130" y="45" width="22" height="22" fill="#0f172a"/>
+          <rect x="162" y="45" width="22" height="22" fill="#0f172a"/>
+          <text x="118" y="40" class="piece-label">Q1</text>
+        </g>
+        <g id="p2" opacity="0">
+          <rect x="210" y="25" width="100" height="80" rx="10" fill="#16a34a" stroke="#0f172a" stroke-width="3"/>
+          <rect x="230" y="45" width="22" height="22" fill="#0f172a"/>
+          <rect x="262" y="45" width="22" height="22" fill="#0f172a"/>
+          <text x="218" y="40" class="piece-label">Q2a</text>
+        </g>
+        <g id="p3" opacity="0">
+          <rect x="110" y="105" width="100" height="90" rx="10" fill="#22c55e" stroke="#0f172a" stroke-width="3"/>
+          <rect x="145" y="125" width="30" height="30" fill="#0f172a"/>
+          <rect x="130" y="155" width="60" height="30" fill="#0f172a"/>
+          <text x="118" y="120" class="piece-label">Q2b</text>
+        </g>
+        <g id="p4" opacity="0">
+          <rect x="210" y="105" width="100" height="90" rx="10" fill="#16a34a" stroke="#0f172a" stroke-width="3"/>
+          <rect x="245" y="125" width="30" height="30" fill="#0f172a"/>
+          <rect x="230" y="155" width="60" height="30" fill="#0f172a"/>
+          <text x="218" y="120" class="piece-label">Q2c</text>
+        </g>
+
+        <rect x="110" y="25" width="200" height="170" rx="14" ry="14" fill="none" stroke="rgba(2,6,23,.18)" stroke-width="3"/>
+        <line x1="210" y1="25" x2="210" y2="195" stroke="rgba(2,6,23,.18)" stroke-width="3"/>
+        <line x1="110" y1="105" x2="310" y2="105" stroke="rgba(2,6,23,.18)" stroke-width="3"/>
+      </svg>
+      <div class="reward-done" id="rewardDone">🎉 Creeper complete! Nice work!</div>
+    </div>
+  </div>
+
+  <div class="fieldrow">
+    <div>
+      <label for="name">Student Name</label><br>
+      <input id="name" type="text" placeholder="Your name">
+    </div>
+    <div>
+      <label for="classBlock">Class / Block</label><br>
+      <select id="classBlock">
+        <option value="">Select…</option>
+        <option>1st Block</option>
+        <option>2nd Block</option>
+        <option>3rd Block</option>
+      </select>
+    </div>
+    <div>
+      <label for="date">Date</label><br>
+      <input id="date" type="date">
+    </div>
+  </div>
+
+  <div class="problem">
+    <strong>1) Express 36 minutes as a fraction of an hour:</strong><br>
+    36 minutes = ______ hour
+    <br><br>
+    <div class="rowflex">
+      <input id="q1" type="text" placeholder="Example: 7/10">
+      <button type="button" class="smallbtn" id="frac1">Fraction</button>
+      <button type="button" id="check1">Check</button>
+      <button type="button" class="secondary" id="clear1">Clear</button>
+    </div>
+    <div id="f1" class="feedback">Hint: 1 hour = 60 minutes. Write <em>36 out of 60</em> and simplify.</div>
+    <div id="rewrite1" class="rewrite">
+      <label>Simplify your fraction (in lowest terms):</label>
+      <input id="rewrite1In" placeholder="Example: 7/10">
+    </div>
+  </div>
+
+  <div class="problem">
+    <strong>2a) Solve:</strong> (2/3) foot = ______ inches
+    <br><br>
+    <div class="rowflex">
+      <input id="q2a" type="text" placeholder="Answer">
+      <button type="button" id="check2a">Check</button>
+      <button type="button" class="secondary" id="clear2a">Clear</button>
+    </div>
+    <div id="f2a" class="feedback">Hint: 1 foot = 12 inches. Find 2/3 of 12.</div>
+  </div>
+
+  <div class="problem">
+    <strong>2b) Solve:</strong> (2/5) meter = ______ cm
+    <br><br>
+    <div class="rowflex">
+      <input id="q2b" type="text" placeholder="Answer">
+      <button type="button" id="check2b">Check</button>
+      <button type="button" class="secondary" id="clear2b">Clear</button>
+    </div>
+    <div id="f2b" class="feedback">Hint: 1 meter = 100 cm. Find 2/5 of 100.</div>
+  </div>
+
+  <div class="problem">
+    <strong>2c) Solve:</strong> (5/6) year = ______ months
+    <br><br>
+    <div class="rowflex">
+      <input id="q2c" type="text" placeholder="Answer">
+      <button type="button" id="check2c">Check</button>
+      <button type="button" class="secondary" id="clear2c">Clear</button>
+    </div>
+    <div id="f2c" class="feedback">Hint: 1 year = 12 months. Find 5/6 of 12.</div>
+  </div>
+
+  <label for="reflection">Reflection (1–2 sentences)</label>
+  <textarea id="reflection" placeholder="What helped you today or what was confusing?"></textarea>
+
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
+    <button type="button" id="submitBtn">Submit (Download Proof)</button>
+  </div>
+
+  <p class="note" style="margin-top:10px">Submit downloads a proof file. Upload it to Google Classroom.</p>
+</div>
+
+<!-- Fraction Builder Modal -->
+<div id="builderBackdrop" class="builder-backdrop" role="dialog" aria-modal="true" aria-labelledby="builderTitle">
+  <div class="builder">
+    <h2 id="builderTitle">Fraction Builder</h2>
+    <p class="note" style="margin:0 0 10px;">Type your fraction like STAAR: whole number (optional), numerator, denominator.</p>
+    <div class="grid3">
+      <div>
+        <label for="wholeIn">Whole (optional)</label>
+        <input id="wholeIn" inputmode="numeric" placeholder="—" />
+      </div>
+      <div>
+        <label for="numIn">Numerator</label>
+        <input id="numIn" inputmode="numeric" placeholder="0" />
+      </div>
+      <div>
+        <label for="denIn">Denominator</label>
+        <input id="denIn" inputmode="numeric" placeholder="1" />
+      </div>
+    </div>
+    <div class="hint">Examples: <strong>7/10</strong> or <strong>1 1/2</strong>.</div>
+    <div class="actions">
+      <button type="button" class="smallbtn" id="cancelBuild">Cancel</button>
+      <button type="button" class="smallbtn" id="clearBuild">Clear</button>
+      <button type="button" class="smallbtn" id="insertBuild" style="background:var(--btn);color:var(--btnText);border:none">Insert</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(() => {
+  const ANSWERS = { q1_num: 3, q1_den: 5, q2a: 8, q2b: 40, q2c: 10 };
+
+  const $ = (id) => document.getElementById(id);
+  const dEl = $("date");
+  if(dEl && !dEl.value) dEl.value = new Date().toISOString().slice(0,10);
+
+  function trim(s){ return (s||"").toString().trim(); }
+  function gcd(a,b){ a=Math.abs(a); b=Math.abs(b); while(b){ const t=a%b; a=b; b=t; } return a; }
+
+  function parseInput(raw){
+    raw = trim(raw);
+    if(!raw) return { ok:false, message:"Please type an answer." };
+
+    let m = raw.match(/^(-?\d+)\s+(\d+)\s*\/\s*(\d+)$/);
+    if(m){
+      const whole = Number(m[1]), n = Number(m[2]), d = Number(m[3]);
+      if(!Number.isFinite(whole)||!Number.isFinite(n)||!Number.isFinite(d)||d===0) return {ok:false,message:"That mixed number isn’t valid."};
+      const sign = whole < 0 ? -1 : 1;
+      return { ok:true, kind:"mixed", value: whole + sign*(n/d), raw, whole, n, d };
+    }
+
+    m = raw.match(/^(-?\d+)\s*\/\s*(-?\d+)$/);
+    if(m){
+      let n = Number(m[1]), d = Number(m[2]);
+      if(!Number.isFinite(n)||!Number.isFinite(d)||d===0) return {ok:false,message:"That fraction isn’t valid."};
+      if(d < 0){ d = -d; n = -n; }
+      return { ok:true, kind:"fraction", value: n/d, raw, n, d };
+    }
+
+    const v = Number(raw);
+    if(!Number.isFinite(v)) return { ok:false, message:"Please type a number (example: 10) or a fraction (example: 3/5)." };
+    return { ok:true, kind:"number", value:v, raw };
+  }
+
+  function setFeedback(el, kind, text){
+    el.classList.remove("good","bad");
+    if(kind) el.classList.add(kind);
+    el.textContent = text;
+  }
+
+  let c1=false,c2a=false,c2b=false,c2c=false;
+
+  function updateReward(){
+    $("p1").style.opacity = c1 ? "1":"0";
+    $("p2").style.opacity = c2a ? "1":"0";
+    $("p3").style.opacity = c2b ? "1":"0";
+    $("p4").style.opacity = c2c ? "1":"0";
+    const count = (c1?1:0)+(c2a?1:0)+(c2b?1:0)+(c2c?1:0);
+    $("rewardStatus").textContent = `Pieces unlocked: ${count}/4`;
+    $("rewardDone").style.display = (count===4) ? "block" : "none";
+  }
+
+  function checkQ1(){
+    const val = parseInput($("q1").value);
+    const fb = $("f1");
+    if(!val.ok){ c1=false; setFeedback(fb,"bad",val.message); updateReward(); return; }
+
+    const correctValue = ANSWERS.q1_num / ANSWERS.q1_den;
+    if(Math.abs(val.value - correctValue) > 1e-9){
+      c1=false;
+      setFeedback(fb,"bad","Not quite. Make a fraction: 36/60, then simplify.");
+      updateReward();
+      return;
+    }
+
+    if(val.kind === "number" || val.kind === "mixed"){
+      c1=false;
+      setFeedback(fb,"good","That value is correct ✅ Now write it as a FRACTION of an hour (like 7/10).");
+      $("rewrite1").style.display="block";
+      $("rewrite1In").focus();
+      updateReward();
+      return;
+    }
+
+    const n = val.n, d = val.d;
+    const g = gcd(n,d);
+    const sn = n/g, sd = d/g;
+
+    if(sn === ANSWERS.q1_num && sd === ANSWERS.q1_den && g === 1){
+      c1=true;
+      setFeedback(fb,"good","Correct! 36/60 simplifies to 3/5 hour.");
+      $("rewrite1").style.display="none";
+      updateReward();
+      return;
+    }
+
+    c1=false;
+    setFeedback(fb,"good","That value is correct ✅ Now simplify your fraction to lowest terms.");
+    $("rewrite1").style.display="block";
+    $("rewrite1In").focus();
+    updateReward();
+  }
+
+  $("rewrite1In").addEventListener("input", () => {
+    const v = parseInput($("rewrite1In").value);
+    if(!v.ok || v.kind!=="fraction") return;
+    const g = gcd(v.n, v.d);
+    const sn = v.n/g, sd = v.d/g;
+    if(sn===ANSWERS.q1_num && sd===ANSWERS.q1_den && g===1){
+      c1=true;
+      $("rewrite1").style.display="none";
+      setFeedback($("f1"),"good","Nice! 3/5 hour is the simplified fraction.");
+      updateReward();
+    }
+  });
+
+  function checkWhole(which, correct, fbId, hintWrong, successText){
+    const val = parseInput($(which).value);
+    const fb = $(fbId);
+    if(!val.ok){ setFeedback(fb,"bad",val.message); return false; }
+    if(Math.abs(val.value - correct) > 1e-9){ setFeedback(fb,"bad",hintWrong); return false; }
+    if(val.kind !== "number"){ setFeedback(fb,"good","That value is correct ✅ Now rewrite it as a WHOLE NUMBER."); return false; }
+    setFeedback(fb,"good",successText);
+    return true;
+  }
+
+  $("check1").addEventListener("click", checkQ1);
+  $("clear1").addEventListener("click", () => {
+    $("q1").value=""; $("rewrite1").style.display="none"; $("rewrite1In").value="";
+    c1=false; setFeedback($("f1"),"", "Hint: 1 hour = 60 minutes. Write 36 out of 60 and simplify."); updateReward();
+  });
+  $("frac1").addEventListener("click", () => openBuilder("q1"));
+
+  $("check2a").addEventListener("click", () => {
+    c2a = checkWhole("q2a", ANSWERS.q2a, "f2a", "Not quite. 1 foot = 12 inches. Find 2/3 of 12.", "Correct! 2/3 of 12 inches = 8 inches.");
+    updateReward();
+  });
+  $("clear2a").addEventListener("click", () => { $("q2a").value=""; c2a=false; setFeedback($("f2a"),"", "Hint: 1 foot = 12 inches. Find 2/3 of 12."); updateReward(); });
+
+  $("check2b").addEventListener("click", () => {
+    c2b = checkWhole("q2b", ANSWERS.q2b, "f2b", "Not quite. 1 meter = 100 cm. Find 2/5 of 100.", "Correct! 2/5 of 100 cm = 40 cm.");
+    updateReward();
+  });
+  $("clear2b").addEventListener("click", () => { $("q2b").value=""; c2b=false; setFeedback($("f2b"),"", "Hint: 1 meter = 100 cm. Find 2/5 of 100."); updateReward(); });
+
+  $("check2c").addEventListener("click", () => {
+    c2c = checkWhole("q2c", ANSWERS.q2c, "f2c", "Not quite. 1 year = 12 months. Find 5/6 of 12.", "Correct! 5/6 of 12 months = 10 months.");
+    updateReward();
+  });
+  $("clear2c").addEventListener("click", () => { $("q2c").value=""; c2c=false; setFeedback($("f2c"),"", "Hint: 1 year = 12 months. Find 5/6 of 12."); updateReward(); });
+
+  // Fraction builder modal
+  let currentTarget = null;
+  function openBuilder(target){
+    currentTarget = target;
+    $("builderBackdrop").style.display = "flex";
+    $("wholeIn").value = ""; $("numIn").value = ""; $("denIn").value = "";
+    $("wholeIn").focus();
+  }
+  function closeBuilder(){ $("builderBackdrop").style.display="none"; currentTarget=null; }
+  function insertFraction(){
+    if(!currentTarget) return;
+    const whole = trim($("wholeIn").value);
+    const num = trim($("numIn").value);
+    const den = trim($("denIn").value);
+    if(!den || Number(den)===0){ alert("Denominator cannot be 0."); return; }
+    if(!num){ alert("Enter a numerator."); return; }
+    $(currentTarget).value = whole ? `${whole} ${num}/${den}` : `${num}/${den}`;
+    closeBuilder();
+  }
+  $("cancelBuild").addEventListener("click", closeBuilder);
+  $("clearBuild").addEventListener("click", () => { $("wholeIn").value=""; $("numIn").value=""; $("denIn").value=""; $("wholeIn").focus(); });
+  $("insertBuild").addEventListener("click", insertFraction);
+  $("builderBackdrop").addEventListener("click", (e) => { if(e.target === $("builderBackdrop")) closeBuilder(); });
+  document.addEventListener("keydown", (e)=>{ if(e.key==="Escape" && $("builderBackdrop").style.display==="flex") closeBuilder(); });
+
+  // Submit proof
+  $("submitBtn").addEventListener("click", () => {
+    const name = trim($("name").value);
+    const block = trim($("classBlock").value);
+    const date = trim($("date").value);
+    if(!name){ alert("Please enter your name."); return; }
+    if(!block){ alert("Please select your class / block."); return; }
+
+    const correctCount = (c1?1:0)+(c2a?1:0)+(c2b?1:0)+(c2c?1:0);
+    const pct = Math.round((correctCount/4)*100);
+
+    const proof =
+`Exit Ticket – Module 4 Lesson 11
+Student: ${name}
+Class/Block: ${block}
+Date: ${date}
+
+1) 36 minutes as a fraction of an hour: ${trim($("q1").value)}
+2a) (2/3) foot in inches: ${trim($("q2a").value)}
+2b) (2/5) meter in cm: ${trim($("q2b").value)}
+2c) (5/6) year in months: ${trim($("q2c").value)}
+
+Correct:
+Q1: ${c1 ? "Yes" : "No"}
+Q2a: ${c2a ? "Yes" : "No"}
+Q2b: ${c2b ? "Yes" : "No"}
+Q2c: ${c2c ? "Yes" : "No"}
+Percent Correct: ${pct}%
+
+Reflection:
+${trim($("reflection").value)}
+
+Completed: ${new Date().toLocaleString()}`;
+
+    const blob = new Blob([proof], {type:"text/plain;charset=utf-8"});
+    const url = URL.createObjectURL(blob);
+    const aTag = document.createElement("a");
+    aTag.href = url;
+    aTag.download = `ExitTicket_M4L11_${name.replace(/[^a-z0-9]/gi,'_')}.txt`;
+    document.body.appendChild(aTag);
+    aTag.click();
+    document.body.removeChild(aTag);
+    URL.revokeObjectURL(url);
+
+    alert("Downloaded! Upload the proof file to Google Classroom.");
+  });
+
+  updateReward();
+})();
+</script>
+</body>
+</html>
